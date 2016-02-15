@@ -23,9 +23,41 @@ Angular HTTP 客户端库简化了我们接下来将学到的`XHR`和`JSONP` API
 * 搜索项输入防抖
 * 附录：内存 web api 服务
 
-
-Appendix: the in-memory web api service
-
 我们通过代码来阐述这些主题，你可以[在浏览器中运行这些例子](https://angular.io/resources/live-examples/server-communication/ts/plnkr.html)。
 
 ### Http 客户端示例
+
+We use the Angular Http client to communicate via XMLHttpRequest (XHR).
+
+We'll demonstrate with a mini-version of the tutorial's "Tour of Heroes" (ToH) application. This version gets some heroes from the server, displays them in a list, lets us add new heroes, and save them to the server.
+
+It works like this.
+
+ToH mini app
+It's implemented with two components — a parent TohComponent shell and the HeroListComponent child. We've seen these kinds of component in many other documentation samples. Let's see how they change to support communication with a server.
+
+We're overdoing the "separation of concerns" by creating two components for a tiny demo. We're making a point about application structure that is easier to justify when the app grows.
+
+Here is the TohComponent shell:
+```ts
+
+
+import {Component}         from 'angular2/core';
+import {HTTP_PROVIDERS}    from 'angular2/http';
+import {Hero}              from './hero';
+import {HeroListComponent} from './hero-list.component';
+import {HeroService}       from './hero.service';
+@Component({
+  selector: 'my-toh',
+  template: `
+  <h1>Tour of Heroes</h1>
+  <hero-list></hero-list>
+  `,
+  directives:[HeroListComponent],
+  providers: [
+    HTTP_PROVIDERS,
+    HeroService,
+  ]
+})
+export class TohComponent { }
+```
