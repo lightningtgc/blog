@@ -27,7 +27,7 @@ Angular HTTP 客户端库简化了我们接下来将学到的`XHR`和`JSONP` API
 
 ### Http 客户端示例
 
-We use the Angular Http client to communicate via XMLHttpRequest (XHR).
+我们使用 Angular Http 客户端通过`XMLHttpRequest(XHR)`去通信。
 
 We'll demonstrate with a mini-version of the tutorial's "Tour of Heroes" (ToH) application. This version gets some heroes from the server, displays them in a list, lets us add new heroes, and save them to the server.
 
