@@ -4,7 +4,7 @@
 
 [Http](https://tools.ietf.org/html/rfc2616)是浏览器/服务器通信最主要的协议。
 
-> [WebSocket](https://tools.ietf.org/html/rfc6455) 协议是另一个重要的通信技术；但我们在这一章中不会涉及到。
+> [WebSocket](https://tools.ietf.org/html/rfc6455) 协议是另一个重要的通信技术；但在这一章中我们不会讲到它。
 
 现代浏览器支持两种基于HTTP的API：[XMLHttpRequest (XHR)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) 和 [JSONP](https://en.wikipedia.org/wiki/JSONP)。少数浏览器也支持[Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)。
 
@@ -29,21 +29,19 @@ Angular HTTP 客户端库简化了我们接下来将学到的`XHR`和`JSONP` API
 
 我们使用 Angular Http 客户端通过`XMLHttpRequest(XHR)`去通信。
 
-我们将展示一个迷你版本的 “Tour of Heroes” (ToH)应用程序的教程。这个版本会从服务器获取一些`hero`，将它们展示在一个列表中，并让我们新增 `hero` 还有将它们保存到服务器中。
+我们将展示一个迷你版本的 “Tour of Heroes” (ToH)应用程序的[教程](https://angular.io/docs/ts/latest/tutorial/)。这个版本会从服务器获取一些`hero`，将它们展示在一个列表中，并让我们新增 `hero` 还有将它们保存到服务器中。
 
 程序运行效果如下：
 
 ![http-toh](https://raw.githubusercontent.com/lightningtgc/blog/master/2016/02/assets/http-toh.gif)
 
-ToH mini app
-It's implemented with two components — a parent TohComponent shell and the HeroListComponent child. We've seen these kinds of component in many other documentation samples. Let's see how they change to support communication with a server.
+这是由两个组件实现的 - 一个父组件 TohComponent和子组件 HeroListComponent。我们已经从许多其他文档例子中知道这些类型的组件。那让我们看看它们是怎么变得可以支持与服务器通信的吧。
 
-We're overdoing the "separation of concerns" by creating two components for a tiny demo. We're making a point about application structure that is easier to justify when the app grows.
+> 我们创建了两个只针对一个小例子的组件，有点将“关系分离”做得过头了。我们提出一个关于当程序发展时更容易调整的程序结构的观点。
 
-Here is the TohComponent shell:
+这是`TohComponent shell`：
+
 ```ts
-
-
 import {Component}         from 'angular2/core';
 import {HTTP_PROVIDERS}    from 'angular2/http';
 import {Hero}              from './hero';
