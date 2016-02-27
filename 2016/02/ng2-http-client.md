@@ -62,7 +62,7 @@ import {HeroService}       from './hero.service';
 })
 export class TohComponent { }
 ```
-As usual, we import the symbols we need. The newcomer is HTTP_PROVIDERS, an array of service providers from the Angular HTTP library. We'll be using that library to access the server. We also import a HeroService that we'll look at shortly.
+通常我们会导入自己需要的内容。这次新导入的是`HTTP_PROVIDERS`,它是一个从 Angular HTTP库中引入的服务提供者的数组。我们将使用那个库来进入服务器。我们也导入一个`HeroService`,待会会提到它。
 
 The component specifies both the `HTTP_PROVIDERS and the HeroService in the metadata providers array, making them available to the child components of this "Tour of Heroes" application.
 
