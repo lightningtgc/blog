@@ -29,9 +29,11 @@ Angular HTTP 客户端库简化了我们接下来将学到的`XHR`和`JSONP` API
 
 我们使用 Angular Http 客户端通过`XMLHttpRequest(XHR)`去通信。
 
-We'll demonstrate with a mini-version of the tutorial's "Tour of Heroes" (ToH) application. This version gets some heroes from the server, displays them in a list, lets us add new heroes, and save them to the server.
+我们将展示一个迷你版本的 “Tour of Heroes” (ToH)应用程序的教程。这个版本会从服务器获取一些`hero`，将它们展示在一个列表中，并让我们新增 `hero` 还有将它们保存到服务器中。
 
-It works like this.
+程序运行效果如下：
+
+![http-toh](https://raw.githubusercontent.com/lightningtgc/blog/master/2016/02/assets/http-toh.gif)
 
 ToH mini app
 It's implemented with two components — a parent TohComponent shell and the HeroListComponent child. We've seen these kinds of component in many other documentation samples. Let's see how they change to support communication with a server.
