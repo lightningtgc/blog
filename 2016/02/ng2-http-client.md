@@ -114,6 +114,7 @@ export class HeroListComponent implements OnInit {
 }
 ```
 
+
 The component template displays a list of heroes with the NgFor repeater directive.
 
 Beneath the heroes is an input box and an Add Hero button where we can enter the names of new heroes and add them to the database. We use a local template variable, newHero, to access the value of the input box in the (click) event binding. When the user clicks the button, we pass that value to the component's addHero method and then clear it to make ready for a new hero name.
