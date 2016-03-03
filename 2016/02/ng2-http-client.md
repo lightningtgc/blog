@@ -114,11 +114,10 @@ export class HeroListComponent implements OnInit {
 }
 ```
 
+组件模板展示了一个用到`NgFor`重复功能的指令的heroes列表。
 
-The component template displays a list of heroes with the NgFor repeater directive.
+在heroes列表下方是一个输入框和一个添加hero的按钮可供我们输入新hero的名字并把加到数据库的。我们使用一个本地模板变量`newHero`通过(click)事件绑定来获得输入框的值。当用户点击这个按钮，我们将那个值传递到组件中的`addHero`方法，接着清除它为下个新的hero名字做准备。
 
-Beneath the heroes is an input box and an Add Hero button where we can enter the names of new heroes and add them to the database. We use a local template variable, newHero, to access the value of the input box in the (click) event binding. When the user clicks the button, we pass that value to the component's addHero method and then clear it to make ready for a new hero name.
+在那个按钮下方是一个可能出现的错误信息。
 
-Below the button is an optional error message.
-
-### The HeroListComponent class
+### HeroListComponent 类
