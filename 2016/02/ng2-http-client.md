@@ -116,8 +116,22 @@ export class HeroListComponent implements OnInit {
 
 组件模板展示了一个用到`NgFor`重复功能的指令的heroes列表。
 
-在heroes列表下方是一个输入框和一个添加hero的按钮可供我们输入新hero的名字并把加到数据库的。我们使用一个本地模板变量`newHero`通过(click)事件绑定来获得输入框的值。当用户点击这个按钮，我们将那个值传递到组件中的`addHero`方法，接着清除它为下个新的hero名字做准备。
+在heroes列表下方是一个输入框和一个添加hero的按钮可供我们输入新hero的名字并把加到数据库的。我们使用一个[本地模板变量](https://angular.io/docs/ts/latest/guide/template-syntax.html#local-vars)`newHero`通过(click)事件绑定来获得输入框的值。当用户点击这个按钮，我们将那个值传递到组件中的`addHero`方法，接着清除它为下个新的hero名字做准备。
 
 在那个按钮下方是一个可能出现的错误信息。
 
 ### HeroListComponent 类
+
+We inject the HeroService into the constructor. That's the instance of the HeroService that we provided in the parent shell TohComponent.
+
+Notice that the component does not talk to the server directly! The component doesn't know or care how we get the data. Those details it delegates to the heroService class (which we'll get to in a moment). This is a golden rule: always delegate data access to a supporting service class.
+
+Although the component should request heroes immediately, we do not call the service get method in the component's constructor. We call it inside the ngOnInit lifecycle hook instead and count on Angular to call ngOnInit when it instantiates this component.
+
+> This is a "best practice". Components are easier to test and debug when their constructors are simple and all real work (especially calling a remote server) is handled in a separate method.
+
+The service get and addHero methods return an Observable of HTTP Responses to which we subscribe, specifying the actions to take if a method succeeds or fails. We'll get to observables and subscription shortly.
+
+With our basic intuitions about the component squared away, we can turn to development of the backend data source and the client-side HeroService that talks to it.
+
+### Fetch data
