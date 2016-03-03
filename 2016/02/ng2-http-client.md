@@ -62,13 +62,13 @@ import {HeroService}       from './hero.service';
 })
 export class TohComponent { }
 ```
-通常我们会导入自己需要的内容。这次新导入的是`HTTP_PROVIDERS`,它是一个从 Angular HTTP库中引入的服务提供者的数组。我们将使用那个库来进入服务器。我们也导入一个`HeroService`,待会会提到它。
+通常我们会导入自己需要的内容。这次新导入的是`HTTP_PROVIDERS`,它是一个从 Angular HTTP库中引入的服务供给的数组。我们将使用那个库来进入服务器。我们也导入一个`HeroService`,待会会提到它。
 
-The component specifies both the `HTTP_PROVIDERS and the HeroService in the metadata providers array, making them available to the child components of this "Tour of Heroes" application.
+组件指定了`HTTP_PROVIDERS`和`HeroService`到元数据供给的数组中，这使得它们能够成为这个“Tour of Heroes”程序的子组件。
 
 > 学习关于`providers`的内容请参看[依赖注入](https://github.com/gf-rd/blog/issues/12)的章节。
 
-This sample only has one child, the HeroListComponent shown here in full:
+这个例子只有一个子组件，`HeroListComponent`全部展示在这里：
 
 app/toh/hero-list.component.ts
 ```ts 
