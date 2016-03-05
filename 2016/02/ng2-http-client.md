@@ -122,7 +122,7 @@ export class HeroListComponent implements OnInit {
 
 ### HeroListComponent 类
 
-We inject the HeroService into the constructor. That's the instance of the HeroService that we provided in the parent shell TohComponent.
+我们将`HeroService`注入到`constructor`中。这是我们在父组件 `TohComponent`提供的`HeroService`实例。
 
 Notice that the component does not talk to the server directly! The component doesn't know or care how we get the data. Those details it delegates to the heroService class (which we'll get to in a moment). This is a golden rule: always delegate data access to a supporting service class.
 
