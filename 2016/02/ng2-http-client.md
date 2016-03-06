@@ -124,7 +124,7 @@ export class HeroListComponent implements OnInit {
 
 我们将`HeroService`注入到`constructor`中。这是我们在父组件 `TohComponent`提供的`HeroService`实例。
 
-Notice that the component does not talk to the server directly! The component doesn't know or care how we get the data. Those details it delegates to the heroService class (which we'll get to in a moment). This is a golden rule: always delegate data access to a supporting service class.
+注意组件不会直接与服务器打交道！组件不知道也不关注我们是怎么获得数据的。那些细节委派给了`heroService`类（我们待会会讲到）。有个指导原则：通过委派一个支持的服务类来获取数据。
 
 Although the component should request heroes immediately, we do not call the service get method in the component's constructor. We call it inside the ngOnInit lifecycle hook instead and count on Angular to call ngOnInit when it instantiates this component.
 
