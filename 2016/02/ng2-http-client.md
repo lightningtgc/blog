@@ -128,7 +128,8 @@ export class HeroListComponent implements OnInit {
 
 虽然组件应该立即请求heroes,但我们不会再组件的constructor里拿方法去调用服务的，而是在生命周期的`ngOnInit`钩子里调用，并依靠Angular在它实例化这个组件时调用`ngOnInit`。
 
-> This is a "best practice". Components are easier to test and debug when their constructors are simple and all real work (especially calling a remote server) is handled in a separate method.
+> 这是一个“最佳实践”。当组件的构造器都是简单的，真正起作用（尤其是调用远程服务器）是在一个分离的方法中进行操作时，组件会变得更容易测试和调试。
+
 
 The service get and addHero methods return an Observable of HTTP Responses to which we subscribe, specifying the actions to take if a method succeeds or fails. We'll get to observables and subscription shortly.
 
