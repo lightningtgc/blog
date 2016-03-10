@@ -130,8 +130,7 @@ export class HeroListComponent implements OnInit {
 
 > 这是一个“最佳实践”。当组件的构造器都是简单的，真正起作用（尤其是调用远程服务器）是在一个分离的方法中进行操作时，组件会变得更容易测试和调试。
 
-
-The service get and addHero methods return an Observable of HTTP Responses to which we subscribe, specifying the actions to take if a method succeeds or fails. We'll get to observables and subscription shortly.
+服务的获取跟`addHero`方法都会返回一个我们订阅的HTTP响应的可观察对象(Observable)，并指定一个方法成功或者失败对应的行为。我们待会还将讲到可观察对象(Observables)和订阅(subscription)。
 
 With our basic intuitions about the component squared away, we can turn to development of the backend data source and the client-side HeroService that talks to it.
 
