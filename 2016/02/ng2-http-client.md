@@ -132,6 +132,6 @@ export class HeroListComponent implements OnInit {
 
 服务的获取跟`addHero`方法都会返回一个我们订阅的HTTP响应的可观察对象(Observable)，并指定一个方法成功或者失败对应的行为。我们待会还将讲到可观察对象(Observables)和订阅(subscription)。
 
-With our basic intuitions about the component squared away, we can turn to development of the backend data source and the client-side HeroService that talks to it.
+在我们关于整理组件的基本直觉下，我们能够转变为使用后端数据源以及和它打交道的客户端侧的`HeroService`的开发方式。
 
-### Fetch data
+### 获取数据
