@@ -135,3 +135,84 @@ export class HeroListComponent implements OnInit {
 在我们关于整理组件的基本直觉下，我们能够转变为使用后端数据源以及和它打交道的客户端侧的`HeroService`的开发方式。
 
 ### 获取数据
+
+In many of our previous samples we faked the interaction with the server by returning mock heroes in a service like this one:
+
+```js
+import {Hero} from './hero';
+import {HEROES} from './mock-heroes';
+import {Injectable} from 'angular2/core';
+
+@Injectable()
+export class HeroService {
+  getHeroes() {
+    return Promise.resolve(HEROES);
+  }
+}
+
+```
+
+In this chapter, we get the heroes from the server using Angular's own HTTP Client service. Here's the new `HeroService`:
+
+app/toh/hero.service.ts
+```js
+import {Injectable}     from 'angular2/core';
+import {Http, Response} from 'angular2/http';
+import {Hero}           from './hero';
+import {Observable}     from 'rxjs/Observable';
+
+@Injectable()
+export class HeroService {
+  constructor (private http: Http) {}
+
+  private _heroesUrl = 'app/heroes';  // URL to web api
+
+  getHeroes () {
+    return this.http.get(this._heroesUrl)
+                    .map(res => <Hero[]> res.json().data)
+                    .catch(this.handleError);
+  }
+  private handleError (error: Response) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    // instead of just logging it to the console
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
+  }
+}
+```
+We begin by importing Angular's Http client service and inject it into the HeroService constructor.
+
+Http is not part of the Angular core. It's an optional service in its own angular2/http library. Moreover, this library isn't even part of the main Angular script file. It's in its own script file (included in the Angular npm bundle) which we must load in index.html.
+
+index.html
+```html
+<script src="node_modules/angular2/bundles/http.dev.js"></script>
+```
+
+Look closely at how we call `http.get`
+
+app/toh/hero.service.ts (http.get)
+```js
+return this.http.get(this._heroesUrl)
+                .map(res => <Hero[]> res.json().data)
+                .catch(this.handleError);
+```
+
+We pass the resource URL to get and it calls the server which should return heroes.
+
+> It will return heroes once we've set up the in-memory web api described in the appendix below.
+
+> Alternatively, we can (temporarily) target a JSON file by changing the endpoint URL:
+
+
+> private _heroesUrl = 'app/heroes.json'; // URL to JSON file
+
+The return value may surprise us. Many of us would expect a promise. We'd expect to chain a call to then() and extract the heroes. Instead we're calling a map() method. Clearly this is not a promise.
+
+In fact, the http.get method returns an Observable of HTTP Responses (Observable<Response>) from the RxJS library and map is one of the RxJS operators.
+
+HTTP GET DELAYED
+
+> The http.get does not send the request just yet! This observable is cold which means the request won't go out until something subscribes to the observable. That something is the HeroListComponent.
+
+### RxJS Library
