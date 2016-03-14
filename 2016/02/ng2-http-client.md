@@ -189,7 +189,7 @@ index.html
 <script src="node_modules/angular2/bundles/http.dev.js"></script>
 ```
 
-Look closely at how we call `http.get`
+再观察一下我们是怎么调用`http.get`的：
 
 app/toh/hero.service.ts (http.get)
 ```js
@@ -197,8 +197,7 @@ return this.http.get(this._heroesUrl)
                 .map(res => <Hero[]> res.json().data)
                 .catch(this.handleError);
 ```
-
-We pass the resource URL to get and it calls the server which should return heroes.
+我们将资源的URL传递过去，它请求了应该返回heroes的服务器。
 
 > It will return heroes once we've set up the in-memory web api described in the appendix below.
 
