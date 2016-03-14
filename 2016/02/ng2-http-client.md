@@ -180,7 +180,7 @@ export class HeroService {
   }
 }
 ```
-We begin by importing Angular's Http client service and inject it into the HeroService constructor.
+我们从导入Angular的Http客户端服务开始，然后把它注入到`HeroService`的constructor中。
 
 Http is not part of the Angular core. It's an optional service in its own angular2/http library. Moreover, this library isn't even part of the main Angular script file. It's in its own script file (included in the Angular npm bundle) which we must load in index.html.
 
