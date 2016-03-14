@@ -152,7 +152,7 @@ export class HeroService {
 
 ```
 
-In this chapter, we get the heroes from the server using Angular's own HTTP Client service. Here's the new `HeroService`:
+在这一节，我们使用 Angular自身的HTTP客户端服务从服务器上获取heroes。下面是新的`HeroService`:
 
 app/toh/hero.service.ts
 ```js
