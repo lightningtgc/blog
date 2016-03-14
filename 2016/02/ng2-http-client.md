@@ -136,7 +136,7 @@ export class HeroListComponent implements OnInit {
 
 ### 获取数据
 
-In many of our previous samples we faked the interaction with the server by returning mock heroes in a service like this one:
+在我们之前很多例子中，我们在一个服务中通过返回模拟的heroes来伪造与服务器交互的情况，如同下面这个例子：
 
 ```js
 import {Hero} from './hero';
