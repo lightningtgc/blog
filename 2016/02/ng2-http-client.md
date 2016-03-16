@@ -201,11 +201,9 @@ return this.http.get(this._heroesUrl)
 
 > 一旦我们像下面附录描述的配置好`in-memory` web api。
 
+> 或者，我们能(短暂地)通过改变请求的URL来指定到一个JSON文件：
 
-> Alternatively, we can (temporarily) target a JSON file by changing the endpoint URL:
-
-
-> private _heroesUrl = 'app/heroes.json'; // URL to JSON file
+> private _heroesUrl = 'app/heroes.json'; // JSON 文件URL
 
 The return value may surprise us. Many of us would expect a promise. We'd expect to chain a call to then() and extract the heroes. Instead we're calling a map() method. Clearly this is not a promise.
 
