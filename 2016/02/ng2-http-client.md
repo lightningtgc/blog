@@ -199,7 +199,8 @@ return this.http.get(this._heroesUrl)
 ```
 我们将资源的URL传递过去，它请求了应该返回heroes的服务器。
 
-> It will return heroes once we've set up the in-memory web api described in the appendix below.
+> 一旦我们像下面附录描述的配置好`in-memory` web api。
+
 
 > Alternatively, we can (temporarily) target a JSON file by changing the endpoint URL:
 
