@@ -205,6 +205,7 @@ return this.http.get(this._heroesUrl)
 
 > private _heroesUrl = 'app/heroes.json'; // JSON 文件URL
 
+返回的值可能让我们吃惊
 The return value may surprise us. Many of us would expect a promise. We'd expect to chain a call to then() and extract the heroes. Instead we're calling a map() method. Clearly this is not a promise.
 
 In fact, the http.get method returns an Observable of HTTP Responses (Observable<Response>) from the RxJS library and map is one of the RxJS operators.
