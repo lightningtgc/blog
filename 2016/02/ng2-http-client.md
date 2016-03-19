@@ -209,8 +209,9 @@ return this.http.get(this._heroesUrl)
 
 实际上，http.get方法从RxJS库里返回一个HTTP响应的可观察对象(Observable<Response>)，还有map是RxJS的一个操作方法。
 
-HTTP GET DELAYED
+HTTP的延迟
 
-> The http.get does not send the request just yet! This observable is cold which means the request won't go out until something subscribes to the observable. That something is the HeroListComponent.
+> http.get暂时还没有发送请求！这个可观察对象是具有冻结性的，意味着请求不会发出去除非有东西订阅了这个对象。这个东西就是HeroListComponent。
+
 
 ### RxJS Library
