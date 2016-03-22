@@ -245,4 +245,27 @@ import 'rxjs/Rx';
 
 ### Map the response object
 
+Let's come back to the HeroService and look at the http.get call again to see why we needed map()
+
+app/toh/hero.service.ts (http.get)
+```js
+return this.http.get(this._heroesUrl)
+                .map(res => <Hero[]> res.json().data)
+                .catch(this.handleError);
+```
+
+The response object does not hold our data in a form we can use directly. It takes an additional step — calling response.json() — to transform the bytes from the server into a JSON object.
+
+> This is not Angular's own design. The Angular HTTP client follows the ES2015 specification for the response object returned by the Fetch function. That spec defines a json() method that parses the response body into a JavaScript object.
+
+> We shouldn't expect json() to return the heroes array directly. The server we're calling always wraps JSON results in an object with a data property. We have to unwrap it to get the heroes. This is conventional web api behavior, driven by security concerns.
+
+** Make no assumptions about the server API. Not all servers return an object with a data property. **
+
+#### Do not return the response object
+
+Our `getHeroes()` could have returned the `Observable<Response>`.
+
+Bad idea! The point of a data service is to hide the server interaction details from consumers. The component that calls the `HeroService` wants heroes. It has no interest in what we do to get them. It doesn't care where they come from. And it certainly doesn't want to deal with a response object.
+
 
