@@ -214,4 +214,35 @@ HTTP的延迟
 > http.get暂时还没有发送请求！这个可观察对象是具有冻结性的，意味着请求不会发出去除非有东西订阅了这个对象。这个东西就是HeroListComponent。
 
 
-### RxJS Library
+### RxJS 库
+
+RxJS ("Reactive Extensions") is a 3rd party library, endorsed by Angular, that implements the asynchronous observable pattern.
+
+All of our Developer Guide samples have installed the RxJS npm package and loaded the RxJS script in index.html because observables are used widely in Angular applications.
+
+index.html
+```html
+<script src="node_modules/rxjs/bundles/Rx.js"></script>
+```
+
+We certainly need it now when working with the HTTP client. And we must take a critical extra step to make RxJS observables usable.
+
+### Enable RxJS Operators
+
+The RxJS library is quite large. Size matters when we build a production application and deploy it to mobile devices. We should include only those features that we actually need.
+
+Accordingly, Angular exposes a stripped down version of Observable in the rxjs/Observable module, a version that lacks almost all operators including the ones we'd like to use here such as the map method we called above in getHeroes.
+
+It's up to us to add the operators we need. We could add each operator, one-by-one, until we had a custom Observable implementation tuned precisely to our requirements.
+
+That would be a distraction today. We're learning HTTP, not counting bytes. So we'll make it easy on ourselves and enrich Observable with the full set of operators. It only takes one import statement. It's best to add that statement early when we're bootstrapping the application. :
+
+app/main.ts (import rxjs)
+```js
+// Add all operators to Observable
+import 'rxjs/Rx';
+```
+
+### Map the response object
+
+
