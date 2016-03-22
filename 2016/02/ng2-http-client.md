@@ -268,4 +268,30 @@ Our `getHeroes()` could have returned the `Observable<Response>`.
 
 Bad idea! The point of a data service is to hide the server interaction details from consumers. The component that calls the `HeroService` wants heroes. It has no interest in what we do to get them. It doesn't care where they come from. And it certainly doesn't want to deal with a response object.
 
+#### Always handle errors
+
+The eagle-eyed reader may have spotted our use of the catch operator in conjunction with a handleError method. We haven't discussed so far how that actually works. Whenever we deal with I/O we must be prepared for something to go wrong as it surely will.
+
+We should catch errors in the HeroService and do something with them. We may also pass an error message back to the component for presentation to the user but only if we can say something the user can understand and act upon.
+
+In this simple app we provide rudimentary error handling in both the service and the component.
+
+We use the Observable catch operator on the service level. It takes an error handling function with the failed Response object as the argument. Our service handler, errorHandler, logs the response to the console, transforms the error into a user-friendly message, and returns the message in a new, failed observable via Observable.throw.
+
+app/toh/hero.service.ts
+```js
+  getHeroes () {
+    return this.http.get(this._heroesUrl)
+                    .map(res => <Hero[]> res.json().data)
+                    .catch(this.handleError);
+  }
+  private handleError (error: Response) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    // instead of just logging it to the console
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
+  }
+```
+
+### Subscribe in the HeroListComponent
 
