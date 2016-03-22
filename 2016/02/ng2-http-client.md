@@ -295,3 +295,33 @@ app/toh/hero.service.ts
 
 ### Subscribe in the HeroListComponent
 
+Back in the HeroListComponent, where we called heroService.get, we supply the subscribe function with a second function to handle the error message. It sets an errorMessage variable which we've bound conditionally in the template.
+
+app/toh/hero-list.component.ts (getHeroes)
+```js
+getHeroes() {
+  this._heroService.getHeroes()
+                   .subscribe(
+                     heroes => this.heroes = heroes,
+                     error =>  this.errorMessage = <any>error);
+}
+```
+
+> Want to see it fail? Reset the api endpoint in the HeroService to a bad value. Remember to restore it!
+
+#### Peek at results in the console
+
+During development we're often curious about the data returned by the server. Logging to console without disrupting the flow would be nice.
+
+The Observable do operator is perfect for the job. It passes the input through to the output while we do something with a useful side-effect such as writing to console. Slip it into the pipeline between map and catch like this.
+
+app/toh/hero.service.ts
+```js
+    return this.http.get(this._heroesUrl)
+                    .map(res => <Hero[]> res.json().data)
+                    .do(data => console.log(data)) // eyeball results in the console
+                    .catch(this.handleError);
+```
+Remember to comment it out before going to production!
+
+### Send data to the server
