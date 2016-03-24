@@ -229,7 +229,8 @@ index.html
 
 ### 开启RxJS 操作
 
-The RxJS library is quite large. Size matters when we build a production application and deploy it to mobile devices. We should include only those features that we actually need.
+RxJS库是相当大的。当我们要构建一个产品程序，并部署到移动设备上时，我们需要考虑它的体积。我们应该只引用那些我们实际上需要的特性。
+
 
 Accordingly, Angular exposes a stripped down version of Observable in the rxjs/Observable module, a version that lacks almost all operators including the ones we'd like to use here such as the map method we called above in getHeroes.
 
