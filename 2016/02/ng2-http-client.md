@@ -325,3 +325,55 @@ app/toh/hero.service.ts
 Remember to comment it out before going to production!
 
 ### Send data to the server
+So far we've seen how to retrieve data from a remote location using Angular's built-in Http service. Let's add the ability to create new heroes and save them in the backend.
+
+We'll create an easy method for the HeroListComponent to call, an addHero method that takes just the name of a new hero and returns an observable holding the newly-saved hero:
+
+```js
+addHero (name: string) : Observable<Hero>
+```
+To implement it, we need to know some details about the server's api for creating heroes.
+
+Our data server follows typical REST guidelines. It expects a POST request at the same endpoint where we `GET` heroes. It expects the new hero data to arrive in the body of the request, structured like a `Hero` entity but without the `id` property. The body of the request should look like this:
+
+```
+{ "name": "Windstorm" }
+```
+
+The server will generate the id and return the entire JSON representation of the new hero including its generated id. The hero arrives tucked inside a response object with its own data property.
+
+Now that we know how the API works, we implement addHerolike this:
+
+app/toh/hero.service.ts (additional imports)
+```js
+import {Headers, RequestOptions} from 'angular2/http';
+```
+app/toh/hero.service.ts (addHero)
+```js
+  addHero (name: string) : Observable<Hero>  {
+
+    let body = JSON.stringify({ name });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this._heroesUrl, body, options)
+                    .map(res =>  <Hero> res.json().data)
+                    .catch(this.handleError)
+  }
+```
+The second body parameter of the post method requires a JSON string so we have to JSON.stringify the hero content before sending.
+
+> We may be able to skip the stringify step in the near future.
+
+#### Headers
+
+The server requires a Content-Type header for the body of the POST. Headers are one of the RequestOptions. Compose the options object and pass it in as the third parameter of the post method.
+
+app/toh/hero.service.ts (headers)
+```js
+let headers = new Headers({ 'Content-Type': 'application/json' });
+let options = new RequestOptions({ headers: headers });
+
+return this.http.post(this._heroesUrl, body, options)
+```
+#### JSON results
