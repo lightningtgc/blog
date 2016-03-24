@@ -216,9 +216,9 @@ HTTP的延迟
 
 ### RxJS 库
 
-RxJS ("Reactive Extensions") is a 3rd party library, endorsed by Angular, that implements the asynchronous observable pattern.
+RxJS ("Reactive Extensions") 是一个Angular支持的第三方的库，可以实现异步观察者模式。
 
-All of our Developer Guide samples have installed the RxJS npm package and loaded the RxJS script in index.html because observables are used widely in Angular applications.
+我们全部的开发者指南示例都安装了RxJS的npm包，以及在`index.html`里加载了RxJS脚本，这么做是因为可观察模式在Angular程序里使用得很广泛。
 
 index.html
 ```html
