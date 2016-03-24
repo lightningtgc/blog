@@ -224,8 +224,8 @@ index.html
 ```html
 <script src="node_modules/rxjs/bundles/Rx.js"></script>
 ```
+当用到HTTP客户端时，我们现在当然需要它。我们必须采用一个额外的关键步骤来使得RxJS可观察模式可用。
 
-We certainly need it now when working with the HTTP client. And we must take a critical extra step to make RxJS observables usable.
 
 ### Enable RxJS Operators
 
