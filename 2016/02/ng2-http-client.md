@@ -231,8 +231,7 @@ index.html
 
 RxJS库是相当大的。当我们要构建一个产品程序，并部署到移动设备上时，我们需要考虑它的体积。我们应该只引用那些我们实际上需要的特性。
 
-
-Accordingly, Angular exposes a stripped down version of Observable in the rxjs/Observable module, a version that lacks almost all operators including the ones we'd like to use here such as the map method we called above in getHeroes.
+因此，Angular 在`rxjs/Observable`模块中暴露一个Observable的精简版本，这版本缺少大多数操作方法包括一些我们想在这里用到的，如在`getHeroes`里调用到的map方法。
 
 It's up to us to add the operators we need. We could add each operator, one-by-one, until we had a custom Observable implementation tuned precisely to our requirements.
 
