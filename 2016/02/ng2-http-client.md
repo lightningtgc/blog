@@ -227,7 +227,7 @@ index.html
 当用到HTTP客户端时，我们现在当然需要它。我们必须采用一个额外的关键步骤来使得RxJS可观察模式可用。
 
 
-### Enable RxJS Operators
+### 开启RxJS 操作
 
 The RxJS library is quite large. Size matters when we build a production application and deploy it to mobile devices. We should include only those features that we actually need.
 
