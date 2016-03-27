@@ -233,7 +233,8 @@ RxJS库是相当大的。当我们要构建一个产品程序，并部署到移�
 
 因此，Angular 在`rxjs/Observable`模块中暴露一个Observable的精简版本，这版本缺少大多数操作方法包括一些我们想在这里用到的，如在`getHeroes`里调用到的map方法。
 
-It's up to us to add the operators we need. We could add each operator, one-by-one, until we had a custom Observable implementation tuned precisely to our requirements.
+这由我们决定是否需要添加这些操作方法。我们可以一个接一个地添加每个操作方法，直到我们有一个刚好符合我们需求的定制的Observable实现。
+
 
 That would be a distraction today. We're learning HTTP, not counting bytes. So we'll make it easy on ourselves and enrich Observable with the full set of operators. It only takes one import statement. It's best to add that statement early when we're bootstrapping the application. :
 
