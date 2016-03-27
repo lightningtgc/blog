@@ -262,7 +262,7 @@ The response object does not hold our data in a form we can use directly. It tak
 
 ** Make no assumptions about the server API. Not all servers return an object with a data property. **
 
-#### Do not return the response object
+#### 不要返回响应的对象
 
 Our `getHeroes()` could have returned the `Observable<Response>`.
 
