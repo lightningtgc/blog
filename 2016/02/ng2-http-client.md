@@ -243,9 +243,9 @@ app/main.ts (import rxjs)
 import 'rxjs/Rx';
 ```
 
-### Map the response object
+### Map 响应的对象
 
-Let's come back to the HeroService and look at the http.get call again to see why we needed map()
+让我们回到`HeroService`，再观察`http.get`的调用，来看看为什么我们需要用到`map()`。
 
 app/toh/hero.service.ts (http.get)
 ```js
