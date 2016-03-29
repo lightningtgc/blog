@@ -254,9 +254,9 @@ return this.http.get(this._heroesUrl)
                 .catch(this.handleError);
 ```
 
-The response object does not hold our data in a form we can use directly. It takes an additional step — calling response.json() — to transform the bytes from the server into a JSON object.
+响应的对象不能从我们直接使用的表单来控制我们的数据。这需要一个额外的步骤 - 调用`response.json()` - 将服务端返回的字节转换为一个JSON对象。
 
-> This is not Angular's own design. The Angular HTTP client follows the ES2015 specification for the response object returned by the Fetch function. That spec defines a json() method that parses the response body into a JavaScript object.
+> 这不是Angular自己设计的。Angular HTTP 客户端遵循ES2015的规范通过`Fetch`函数返回响应对象。那个规范定义了一个解析响应体为一个JavaScript对象的`json()`方法。
 
 > We shouldn't expect json() to return the heroes array directly. The server we're calling always wraps JSON results in an object with a data property. We have to unwrap it to get the heroes. This is conventional web api behavior, driven by security concerns.
 
