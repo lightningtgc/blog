@@ -258,9 +258,9 @@ return this.http.get(this._heroesUrl)
 
 > 这不是Angular自己设计的。Angular HTTP 客户端遵循ES2015的规范通过`Fetch`函数返回响应对象。那个规范定义了一个解析响应体为一个JavaScript对象的`json()`方法。
 
-> We shouldn't expect json() to return the heroes array directly. The server we're calling always wraps JSON results in an object with a data property. We have to unwrap it to get the heroes. This is conventional web api behavior, driven by security concerns.
+> 我们不应该认为`json()`就会直接返回heroes数组。我们访问的服务器经常将JSON结果包装成一个有数据属性的对象。我们需要解包这个对象来获取heroes。这是常见的web api行为，初衷是基于安全的考虑。
 
-** Make no assumptions about the server API. Not all servers return an object with a data property. **
+**Make no assumptions about the server API. Not all servers return an object with a data property.**
 
 #### 不要返回响应的对象
 
