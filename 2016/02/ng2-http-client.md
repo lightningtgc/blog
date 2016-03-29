@@ -395,3 +395,126 @@ addHero (name: string) {
 ```
 
 ### Fall back to Promises
+Although the Angular http client API returns an Observable<Response> we can turn it into a Promise if we prefer. It's easy to do and a promise-based version looks much like the observable-based version in simple cases.
+
+> While promises may be more familiar, observables have many advantages. Don't rush to promises until you give observables a chance.
+
+Let's rewrite the HeroService using promises , highlighting just the parts that are different.
+
+app/toh/hero.service.ts (promise-based) 
+```js
+getHeroes () {
+  return this.http.get(this._heroesUrl)
+                  .toPromise()
+                  .then(res => <Hero[]> res.json().data, this.handleError)
+                  .then(data => { console.log(data); return data; }); // eyeball results in the console
+}
+addHero (name: string) : Promise<Hero> {
+  let body = JSON.stringify({ name });
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+  let options = new RequestOptions({ headers: headers });
+  return this.http.post(this._heroesUrl, body, options)
+             .toPromise()
+             .then(res => <Hero> res.json().data)
+             .catch(this.handleError);
+}
+private handleError (error: any) {
+  // in a real world app, we may send the error to some remote logging infrastructure
+  // instead of just logging it to the console
+  console.error(error);
+  return Promise.reject(error.message || error.json().error || 'Server error');
+}
+```
+
+app/toh/hero.service.ts (observable-based)
+```js
+  getHeroes () {
+    return this.http.get(this._heroesUrl)
+                    .map(res => <Hero[]> res.json().data)
+                    .do(data => console.log(data)) // eyeball results in the console
+                    .catch(this.handleError);
+  }
+  addHero (name: string) : Observable<Hero>  {
+    let body = JSON.stringify({ name });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this._heroesUrl, body, options)
+                    .map(res =>  <Hero> res.json().data)
+                    .catch(this.handleError)
+  }
+  private handleError (error: Response) {
+    // in a real world app, we may send the error to some remote logging infrastructure
+    // instead of just logging it to the console
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
+  }
+```
+
+Converting from an observable to a promise is as simple as calling toPromise(success, fail).
+
+We move the observable's map callback to the first success parameter and its catch callback to the second fail parameter and we're done! Or we can follow the promise then.catch pattern as we do in the second addHero example.
+
+Our errorHandler forwards an error message as a failed promise instead of a failed Observable.
+
+The diagnostic log to console is just one more then in the promise chain.
+
+We have to adjust the calling component to expect a Promise instead of an Observable.
+
+app/toh/hero-list.component.ts (promise-based) 
+```js
+getHeroes() {
+  this._heroService.getHeroes()
+                   .then(
+                     heroes => this.heroes = heroes,
+                     error =>  this.errorMessage = <any>error);
+}
+addHero (name: string) {
+  if (!name) {return;}
+  this._heroService.addHero(name)
+                   .then(
+                     hero  => this.heroes.push(hero),
+                     error =>  this.errorMessage = <any>error);
+}
+```
+
+app/toh/hero-list.component.ts (observable-based)
+```js
+  getHeroes() {
+    this._heroService.getHeroes()
+                     .subscribe(
+                       heroes => this.heroes = heroes,
+                       error =>  this.errorMessage = <any>error);
+  }
+  addHero (name: string) {
+    if (!name) {return;}
+    this._heroService.addHero(name)
+                     .subscribe(
+                       hero  => this.heroes.push(hero),
+                       error =>  this.errorMessage = <any>error);
+  }
+```
+
+The only obvious difference is that we call then on the returned promise instead of subscribe. We give both methods the same functional arguments.
+
+> The less obvious but critical difference is that these two methods return very different results!
+
+> The promise-based then returns another promise. We can keep chaining more then and catch calls, getting a new promise each time.
+
+> The subscribe method returns a Subscription. A Subscription is not another Observable. It's the end of the line for observables. We can't call map on it or call subscribe again. The Subscription object has a different purpose, signified by its primary method, unsubscribe.
+
+> Learn more about observables to understand the implications and consequences of subscriptions
+
+### Get data with `JSONP`
+
+We just learned how to make `XMLHttpRequests` using Angulars built-in `Http` service. This is the most common approach for server communication. It doesn't work in all scenarios.
+
+For security reasons, web browsers block `XHR` calls to a remote server whose origin is different from the origin of the web page. The origin is the combination of URI scheme, hostname and port number. This is called the Same-origin Policy.
+
+> Modern browsers do allow XHR requests to servers from a different origin if the server supports the CORS protocol. If the server requires user credentials, we'll enable them in the request headers.
+
+Some servers do not support CORS but do support an older, read-only alternative called JSONP. Wikipedia is one such server.
+
+> This StackOverflow answer covers many details of JSONP.
+
+#### Search wikipedia
+Wikipedia offers a JSONP search api. Let's build a simple search that shows suggestions from wikipedia as we type in a text box.
