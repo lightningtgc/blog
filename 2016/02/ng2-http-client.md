@@ -260,7 +260,7 @@ return this.http.get(this._heroesUrl)
 
 > 我们不应该认为`json()`就会直接返回heroes数组。我们访问的服务器经常将JSON结果包装成一个有数据属性的对象。我们需要解包这个对象来获取heroes。这是常见的web api行为，初衷是基于安全的考虑。
 
-**Make no assumptions about the server API. Not all servers return an object with a data property.**
+**不要对服务器API 做任何假设。不是全部的服务器都会返回一个有数据属性的对象的**
 
 #### 不要返回响应的对象
 
