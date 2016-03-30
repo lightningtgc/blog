@@ -264,9 +264,10 @@ return this.http.get(this._heroesUrl)
 
 #### 不要返回响应的对象
 
-Our `getHeroes()` could have returned the `Observable<Response>`.
+我们的`getHeroes()`可以返回`Observable<Response>`。
 
-Bad idea! The point of a data service is to hide the server interaction details from consumers. The component that calls the `HeroService` wants heroes. It has no interest in what we do to get them. It doesn't care where they come from. And it certainly doesn't want to deal with a response object.
+但这是糟糕的主意！数据服务的要点是去隐藏服务器跟用户的交互细节。调用`HeroService`的组件是想要获取heroes。它不关注我们怎么获取heroes。它也不关心它们从哪里来得。还有它当然也不想去处理响应的对象。
+
 
 #### Always handle errors
 
