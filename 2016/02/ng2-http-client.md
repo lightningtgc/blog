@@ -268,7 +268,7 @@ return this.http.get(this._heroesUrl)
 
 但这是糟糕的主意！数据服务的要点是去隐藏服务器跟用户的交互细节。调用`HeroService`的组件是想要获取heroes。它不关注我们怎么获取heroes。它也不关心它们从哪里来得。还有它当然也不想去处理响应的对象。
 
-
+#### 
 #### Always handle errors
 
 The eagle-eyed reader may have spotted our use of the catch operator in conjunction with a handleError method. We haven't discussed so far how that actually works. Whenever we deal with I/O we must be prepared for something to go wrong as it surely will.
@@ -277,7 +277,7 @@ We should catch errors in the HeroService and do something with them. We may als
 
 In this simple app we provide rudimentary error handling in both the service and the component.
 
-We use the Observable catch operator on the service level. It takes an error handling function with the failed Response object as the argument. Our service handler, errorHandler, logs the response to the console, transforms the error into a user-friendly message, and returns the message in a new, failed observable via Observable.throw.
+We use the Observable catch operator on the service level. It takes an error handling function with the failed Response object as the argument. Our service handler, errorHandler, logs the response to the console, transforms the error into a user-friendly message, and returns the message in a n ew, failed observable via Observable.throw.
 
 app/toh/hero.service.ts
 ```js
