@@ -269,10 +269,8 @@ return this.http.get(this._heroesUrl)
 但这是糟糕的主意！数据服务的要点是去隐藏服务器跟用户的交互细节。调用`HeroService`的组件是想要获取heroes。它不关注我们怎么获取heroes。它也不关心它们从哪里来得。还有它当然也不想去处理响应的对象。
 
 #### 总是对错误进行处理
-#### Always handle errors
 
-眼尖的读者可能发现
-The eagle-eyed reader may have spotted our use of the catch operator in conjunction with a handleError method. We haven't discussed so far how that actually works. Whenever we deal with I/O we must be prepared for something to go wrong as it surely will.
+眼尖的读者可能发现我们写的catch操作方法加入了一个handleError方法。我们还没讨论那么远关于里面实际上是怎么运作的。无论何时我们处理 I/O ，我们必须准备好假设真的出错后的处理手段。
 
 We should catch errors in the HeroService and do something with them. We may also pass an error message back to the component for presentation to the user but only if we can say something the user can understand and act upon.
 
