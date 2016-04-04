@@ -272,7 +272,7 @@ return this.http.get(this._heroesUrl)
 
 眼尖的读者可能发现我们写的catch操作方法加入了一个handleError方法。我们还没讨论那么远关于里面实际上是怎么运作的。无论何时我们处理 I/O ，我们必须准备好假设真的出错后的处理手段。
 
-We should catch errors in the HeroService and do something with them. We may also pass an error message back to the component for presentation to the user but only if we can say something the user can understand and act upon.
+我们应该在`HeroService`里面捕获错误并对进行相应处理。我们也可能将错误信息传回给组件来展示给用户看，但仅限于我们说的是用户能理解和行动起来的东西。
 
 In this simple app we provide rudimentary error handling in both the service and the component.
 
