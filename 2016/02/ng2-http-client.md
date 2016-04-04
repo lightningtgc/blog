@@ -518,3 +518,112 @@ Some servers do not support CORS but do support an older, read-only alternative 
 
 #### Search wikipedia
 Wikipedia offers a JSONP search api. Let's build a simple search that shows suggestions from wikipedia as we type in a text box.
+
+图片
+
+The Angular Jsonp service both extends the Http service for JSONP and restricts us to GET requests. All other HTTP methods throw an error because JSONP is a read-only facility.
+
+As always, we wrap our interaction with an Angular data access client service inside a dedicated service, here called WikipediaService.
+
+app/wiki/wikipedia.service.ts
+```js
+import {Injectable} from 'angular2/core';
+import {Jsonp, URLSearchParams} from 'angular2/http';
+@Injectable()
+export class WikipediaService {
+  constructor(private jsonp: Jsonp) {}
+  search (term: string) {
+    let wikiUrl = 'http://en.wikipedia.org/w/api.php';
+    var params = new URLSearchParams();
+    params.set('search', term); // the user's search value
+    params.set('action', 'opensearch');
+    params.set('format', 'json');
+    params.set('callback', 'JSONP_CALLBACK');
+    // TODO: Add error handling
+    return this.jsonp
+               .get(wikiUrl, { search: params })
+               .map(request => <string[]> request.json()[1]);
+  }
+}
+```
+The constructor expects Angular to inject its jsonp service. We register that service with JSONP_PROVIDERS in the component below that calls our WikipediaService.
+
+#### Search parameters
+
+The Wikipedia 'opensearch' API expects four parameters (key/value pairs) to arrive in the request URL's query string. The keys are search, action, format, and callback. The value of the search key is the user-supplied search term to find in Wikipedia. The other three are the fixed values "opensearch", "json", and "JSONP_CALLBACK" respectively.
+
+> The JSONP technique requires that we pass a callback function name to the server in the query string: callback=JSONP_CALLBACK. The server uses that name to build a JavaScript wrapper function in its response which Angular ultimately calls to extract the data. All of this happens under the hood.
+
+If we're looking for articles with the word "Angular", we could construct the query string by hand and call jsonp like this:
+```js
+
+let queryString =
+  `?search=${term}&action=opensearch&format=json&callback=JSONP_CALLBACK`
+
+return this.jsonp
+           .get(wikiUrl + queryString)
+           .map(request => <string[]> request.json()[1]);
+```
+In more parameterized examples we might prefer to build the query string with the Angular URLSearchParams helper as shown here:
+
+app/wiki/wikipedia.service.ts (search parameters)
+```js
+var params = new URLSearchParams();
+params.set('search', term); // the user's search value
+params.set('action', 'opensearch');
+params.set('format', 'json');
+params.set('callback', 'JSONP_CALLBACK');
+```
+
+This time we call jsonp with two arguments: the wikiUrl and an options object whose search property is the params object.
+
+app/wiki/wikipedia.service.ts (call jsonp)
+```js
+// TODO: Add error handling
+return this.jsonp
+           .get(wikiUrl, { search: params })
+           .map(request => <string[]> request.json()[1]);
+```
+
+Jsonp flattens the params object into the same query string we saw earlier before putting the request on the wire.
+
+### The WikiComponent
+
+Now that we have a service that can query the Wikipedia API, we turn to the component that takes user input and displays search results.
+
+app/wiki/wiki.component.ts
+```js
+import {Component}        from 'angular2/core';
+import {JSONP_PROVIDERS}  from 'angular2/http';
+import {Observable}       from 'rxjs/Observable';
+import {WikipediaService} from './wikipedia.service';
+@Component({
+  selector: 'my-wiki',
+  template: `
+    <h1>Wikipedia Demo</h1>
+    <p><i>Fetches after each keystroke</i></p>
+    <input #term (keyup)="search(term.value)"/>
+    <ul>
+      <li *ngFor="#item of items | async">{{item}}</li>
+    </ul>
+  `,
+  providers:[JSONP_PROVIDERS, WikipediaService]
+})
+export class WikiComponent {
+  constructor (private _wikipediaService: WikipediaService) {}
+  items: Observable<string[]>;
+  search (term: string) {
+    this.items = this._wikipediaService.search(term);
+  }
+}
+```
+The providers array in the component metadata specifies the Angular JSONP_PROVIDERS collection that supports the Jsonp service. We register that collection at the component level to make Jsonp injectable in the WikipediaService.
+
+The component presents an <input> element search box to gather search terms from the user. and calls a search(term) method after each keyup event.
+
+The search(term) method delegates to our WikipediaService which returns an observable array of string results (Observable<string[]). Instead of subscribing to the observable inside the component as we did in the HeroListComponent, we forward the observable result to the template (via items) where the async pipe in the ngFor handles the subscription.
+
+> We often use the async pipe in read-only components where the component has no need to interact with the data. We couldn't use the pipe in the HeroListComponent because the "add hero" feature pushes newly created heroes into the list.
+
+### Our wasteful app
+
