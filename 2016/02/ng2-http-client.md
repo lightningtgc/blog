@@ -274,7 +274,7 @@ return this.http.get(this._heroesUrl)
 
 我们应该在`HeroService`里面捕获错误并对进行相应处理。我们也可能将错误信息传回给组件来展示给用户看，但仅限于我们说的是用户能理解和行动起来的东西。
 
-In this simple app we provide rudimentary error handling in both the service and the component.
+在这个简单的应用里，我们在服务跟组件中都提供基本的错误处理。
 
 We use the Observable catch operator on the service level. It takes an error handling function with the failed Response object as the argument. Our service handler, errorHandler, logs the response to the console, transforms the error into a user-friendly message, and returns the message in a n ew, failed observable via Observable.throw.
 
