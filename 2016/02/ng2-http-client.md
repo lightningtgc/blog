@@ -276,7 +276,7 @@ return this.http.get(this._heroesUrl)
 
 在这个简单的应用里，我们在服务跟组件中都提供基本的错误处理。
 
-We use the Observable catch operator on the service level. It takes an error handling function with the failed Response object as the argument. Our service handler, errorHandler, logs the response to the console, transforms the error into a user-friendly message, and returns the message in a n ew, failed observable via Observable.throw.
+我们在服务层面上使用Observable的`catch`操作方法。它采用一个将失败的响应对象作为参数的错误处理函数。我们通过`Observable.throw`进行服务处理，错误处理,将响应打印到控制台，将错误转化为一个用户友好的信息，以及将信息返回成一个新的失败的可观察对象。
 
 app/toh/hero.service.ts
 ```js
