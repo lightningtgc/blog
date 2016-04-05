@@ -293,9 +293,9 @@ app/toh/hero.service.ts
   }
 ```
 
-### Subscribe in the HeroListComponent
+### 在HeroListComponent中的订阅模式
 
-Back in the HeroListComponent, where we called heroService.get, we supply the subscribe function with a second function to handle the error message. It sets an errorMessage variable which we've bound conditionally in the template.
+回到HeroListComponent中，在我们调用`heroService.get`方法的地方，我们提供了有第二个函数参数来处理错误信息的subscribe函数。它设置了一个我们在模板中有条件地绑定的errorMessage变量。
 
 app/toh/hero-list.component.ts (getHeroes)
 ```js
