@@ -307,9 +307,10 @@ getHeroes() {
 }
 ```
 
-> Want to see it fail? Reset the api endpoint in the HeroService to a bad value. Remember to restore it!
+> 想看看它失败的情况？可在HeroService里将api返回值重置成一个错误的值。但要记得恢复它。
 
-#### Peek at results in the console
+#### 在控制台中一窥结果
+
 
 During development we're often curious about the data returned by the server. Logging to console without disrupting the flow would be nice.
 
