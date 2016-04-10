@@ -311,7 +311,7 @@ getHeroes() {
 
 #### 在控制台中一窥结果
 
-
+在开发中我们经常对服务器返回的数据感觉好奇。不扰乱开发流而将数据打印到控制台将会很不错。
 During development we're often curious about the data returned by the server. Logging to console without disrupting the flow would be nice.
 
 The Observable do operator is perfect for the job. It passes the input through to the output while we do something with a useful side-effect such as writing to console. Slip it into the pipeline between map and catch like this.
