@@ -311,10 +311,9 @@ getHeroes() {
 
 #### 在控制台中一窥结果
 
-在开发中我们经常对服务器返回的数据感觉好奇。不扰乱开发流而将数据打印到控制台将会很不错。
-During development we're often curious about the data returned by the server. Logging to console without disrupting the flow would be nice.
+在开发中我们经常对服务器返回的数据感到好奇。将数据打印到控制台又不扰乱开发流将是不错的做法。
 
-The Observable do operator is perfect for the job. It passes the input through to the output while we do something with a useful side-effect such as writing to console. Slip it into the pipeline between map and catch like this.
+Observable的do操作符可以完美胜任这项工作。当我们处理一些跟一个有用的副作用的东西例如写数据到控制台时它会将输入的东西输出出来。把她放在管道中像在`map`和`catch`之间这样。
 
 app/toh/hero.service.ts
 ```js
@@ -323,7 +322,8 @@ app/toh/hero.service.ts
                     .do(data => console.log(data)) // eyeball results in the console
                     .catch(this.handleError);
 ```
-Remember to comment it out before going to production!
+记得在发布生产环境是要注释掉它！
+
 
 ### Send data to the server
 So far we've seen how to retrieve data from a remote location using Angular's built-in Http service. Let's add the ability to create new heroes and save them in the backend.
