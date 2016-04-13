@@ -324,9 +324,9 @@ app/toh/hero.service.ts
 ```
 记得在发布生产环境是要注释掉它！
 
+### 发送数据到服务器
+到现在为止我们已经知道怎么使用Angular的内置Http服务来从一个远程地址获取数据。接下来让我们增加能创建新的heroes和在后端保存它们的能力。
 
-### Send data to the server
-So far we've seen how to retrieve data from a remote location using Angular's built-in Http service. Let's add the ability to create new heroes and save them in the backend.
 
 We'll create an easy method for the HeroListComponent to call, an addHero method that takes just the name of a new hero and returns an observable holding the newly-saved hero:
 
