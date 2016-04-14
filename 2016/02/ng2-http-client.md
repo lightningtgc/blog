@@ -327,13 +327,12 @@ app/toh/hero.service.ts
 ### 发送数据到服务器
 到现在为止我们已经知道怎么使用Angular的内置Http服务来从一个远程地址获取数据。接下来让我们增加能创建新的heroes和在后端保存它们的能力。
 
-
-We'll create an easy method for the HeroListComponent to call, an addHero method that takes just the name of a new hero and returns an observable holding the newly-saved hero:
+我们将创建一个简单方法给`HeroListComponent`去调用，一个仅拿到新的hero的名字并返回一个observable来保留新保存的hero的`addHero`方法。
 
 ```js
 addHero (name: string) : Observable<Hero>
 ```
-To implement it, we need to know some details about the server's api for creating heroes.
+为了实现这个，我们需要知道一个关于创建heroes的服务器api的细节。
 
 Our data server follows typical REST guidelines. It expects a POST request at the same endpoint where we `GET` heroes. It expects the new hero data to arrive in the body of the request, structured like a `Hero` entity but without the `id` property. The body of the request should look like this:
 
