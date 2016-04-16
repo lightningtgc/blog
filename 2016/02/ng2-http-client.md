@@ -334,7 +334,7 @@ addHero (name: string) : Observable<Hero>
 ```
 为了实现这个，我们需要知道一个关于创建heroes的服务器api的细节。
 
-Our data server follows typical REST guidelines. It expects a POST request at the same endpoint where we `GET` heroes. It expects the new hero data to arrive in the body of the request, structured like a `Hero` entity but without the `id` property. The body of the request should look like this:
+我们的数据服务器遵循经典的REST指导方针。它期望一个POST请求在我们获取heroes的相同端点。它期望新的hero数据到达请求体中，结构如同`Hero`的实体但没有`id`属性。请求体应该看起来像下面的：
 
 ```
 { "name": "Windstorm" }
