@@ -340,6 +340,8 @@ addHero (name: string) : Observable<Hero>
 { "name": "Windstorm" }
 ```
 
+服务器会产生`id`并返回包括它产生的`id`的新hero代表的完整JSON。Hero
+
 The server will generate the id and return the entire JSON representation of the new hero including its generated id. The hero arrives tucked inside a response object with its own data property.
 
 Now that we know how the API works, we implement addHerolike this:
