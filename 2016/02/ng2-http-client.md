@@ -342,8 +342,7 @@ addHero (name: string) : Observable<Hero>
 
 服务器会产生`id`并返回包括它产生的`id`的新hero代表的完整JSON。Hero包裹成一个有自己数据属性的响应对象去返回。
 
-
-Now that we know how the API works, we implement addHerolike this:
+现在我们知道API是怎么运作的，我们像下面一样来实现`addHerolike`:
 
 app/toh/hero.service.ts (additional imports)
 ```js
