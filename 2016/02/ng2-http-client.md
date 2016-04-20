@@ -361,9 +361,10 @@ app/toh/hero.service.ts (addHero)
                     .catch(this.handleError)
   }
 ```
-The second body parameter of the post method requires a JSON string so we have to JSON.stringify the hero content before sending.
 
-> We may be able to skip the stringify step in the near future.
+`post`方法的第二个参数body需要一个JSON字符串,所以在发送前我们需要使用`JSON.stringify`来转换hero的内容。
+
+> 在不久的将来我们可能可以不用stringify这个步骤。
 
 #### Headers
 
