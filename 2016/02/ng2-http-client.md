@@ -384,7 +384,7 @@ return this.http.post(this._heroesUrl, body, options)
 
 > 知道服务器返回的数据模型。这个web api返回包装成有数据属性的对象的新的hero。一个不同的api可能只返回我们忽略数据的解除绑定的案例中的hero。
 
-Back in the HeroListComponent, we see that its addHero method subscribes to the observable returned by the service's addHero method. When the data arrive it pushes the new hero object into its heroes array for presentation to the user.
+回到`HeroListComponent`中，我们看到它的`addHero`方法订阅通过服务的`addHero`方法返回的observable。当数据到达时，它将新的hero对象push进它的heroes数据中为了展示给用户看。
 
 app/toh/hero-list.component.ts (addHero)
 ```js
