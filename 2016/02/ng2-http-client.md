@@ -368,7 +368,7 @@ app/toh/hero.service.ts (addHero)
 
 #### Headers
 
-The server requires a Content-Type header for the body of the POST. Headers are one of the RequestOptions. Compose the options object and pass it in as the third parameter of the post method.
+服务器要求POST请求体有一个`Content-Type`的头部。`headers`是`RequestOptions`中的一个属性。组成可选对象并以post方法的第三方参数将它传进去。
 
 app/toh/hero.service.ts (headers)
 ```js
