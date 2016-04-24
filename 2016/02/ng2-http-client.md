@@ -377,10 +377,12 @@ let options = new RequestOptions({ headers: headers });
 
 return this.http.post(this._heroesUrl, body, options)
 ```
-#### JSON results
-As with get, we extract the data from the response with json() and unwrap the hero via the data property.
+#### JSON 结果
 
-> Know the shape of the data returned by the server. This web api returns the new hero wrapped in an object with a data property. A different api might just return the hero in which case we'd omit the data de-reference.
+正如get请求,我们从有`json()`的响应体中提取数据，并通过数据属性拆解hero。
+
+
+> 知道服务器返回的数据模型。这个web api返回包装成有数据属性的对象的新的hero。一个不同的api可能只返回我们忽略数据的解除绑定的案例中的hero。
 
 Back in the HeroListComponent, we see that its addHero method subscribes to the observable returned by the service's addHero method. When the data arrive it pushes the new hero object into its heroes array for presentation to the user.
 
