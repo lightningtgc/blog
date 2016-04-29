@@ -507,7 +507,7 @@ The only obvious difference is that we call then on the returned promise instead
 
 > Learn more about observables to understand the implications and consequences of subscriptions
 
-### Get data with `JSONP`
+### 通过`JSONP`获取数据
 
 We just learned how to make `XMLHttpRequests` using Angulars built-in `Http` service. This is the most common approach for server communication. It doesn't work in all scenarios.
 
@@ -519,7 +519,7 @@ Some servers do not support CORS but do support an older, read-only alternative 
 
 > This StackOverflow answer covers many details of JSONP.
 
-#### Search wikipedia
+#### 搜索wikipedia（维基百科）
 Wikipedia offers a JSONP search api. Let's build a simple search that shows suggestions from wikipedia as we type in a text box.
 
 图片
@@ -551,7 +551,7 @@ export class WikipediaService {
 ```
 The constructor expects Angular to inject its jsonp service. We register that service with JSONP_PROVIDERS in the component below that calls our WikipediaService.
 
-#### Search parameters
+#### 搜索的参数
 
 The Wikipedia 'opensearch' API expects four parameters (key/value pairs) to arrive in the request URL's query string. The keys are search, action, format, and callback. The value of the search key is the user-supplied search term to find in Wikipedia. The other three are the fixed values "opensearch", "json", and "JSONP_CALLBACK" respectively.
 
@@ -590,7 +590,7 @@ return this.jsonp
 
 Jsonp flattens the params object into the same query string we saw earlier before putting the request on the wire.
 
-### The WikiComponent
+### WikiComponent组件
 
 Now that we have a service that can query the Wikipedia API, we turn to the component that takes user input and displays search results.
 
