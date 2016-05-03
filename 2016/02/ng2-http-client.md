@@ -630,3 +630,24 @@ The search(term) method delegates to our WikipediaService which returns an obser
 
 ### Our wasteful app
 
+Our wikipedia search makes too many calls to the server. It is inefficient and potentially expensive on mobile devices with limited data plans.
+
+##### 1. Wait for the user to stop typing
+
+At the moment we call the server after every key stroke. The app should only make requests when the user stops typing . Here's how it should work — and will work — when we're done refactoring:
+
+图
+
+##### 2. Search when the search term changes
+
+Suppose the user enters the word angular in the search box and pauses for a while. The application issues a search request for Angular.
+
+Then the user backspaces over the last three letters, lar, and immediately re-types lar before pausing once more. The search term is still "angular". The app shouldn't make another request.
+
+##### 3. Cope with out-of-order responses
+
+The user enters angular, pauses, clears the search box, and enters http. The application issues two search requests, one for angular and one for http.
+
+Which response will arrive first? We can't be sure. A load balancer could dispatch the requests to two different servers with different response times. The results from the first angular request might arrive after the later http results. The user will be confused if we display the angular results to the http query.
+
+When there are multiple requests in-flight, the app should present the responses in the original request order. That won't happen if angular results arrive last.
