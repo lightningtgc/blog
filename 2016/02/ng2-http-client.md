@@ -724,3 +724,96 @@ The switchMap (formerly known as flatMapLatest) returns a new observable that co
 
 The displayed list of search results stays in sync with the user's sequence of search terms.
 
+
+## Appendix: Tour of Heroes in-memory server
+
+If we only cared to retrieve data, we could tell Angular to get the heroes from a heroes.json file like this one:
+
+app/heroes.json
+```js
+{
+  "data": [
+    { "id": "1", "name": "Windstorm" },
+    { "id": "2", "name": "Bombasto" },
+    { "id": "3", "name": "Magneta" },
+    { "id": "4", "name": "Tornado" }
+  ]
+}
+```
+
+> We wrap the heroes array in an object with a data property for the same reason that a data server does: to mitigate the security risk posed by top-level JSON arrays.
+
+We'd set the endpoint to the JSON file like this:
+
+```js
+private _heroesUrl = 'app/heroes.json'; // URL to JSON file
+```
+The get heroes scenario would work. But we want to save data too. We can't save changes to a JSON file. We need a web api server.
+
+We didn't want the hassle of setting up and maintaining a real server for this chapter. So we turned to an in-memory web api simulator instead. You too can use it in your own development while waiting for a real server to arrive.
+
+First, install it with `npm`:
+```
+npm install a2-in-memory-web-api --save
+```
+Then load the script in the index.html below angular:
+
+index.html
+```html
+BAD FILENAME: ../../../_fragments/server-communication/ts/index-in-mem-web-api.html.md   Current path: docs,ts,latest,guide,server-communication PathToDocs: ../../../
+```
+
+The in-memory web api gets its data from a class with a createDb() method that returns a "database" object whose keys are collection names ("heroes") and whose values are arrays of objects in those collections.
+
+Here's the class we created for this sample by copy-and-pasting the JSON data:
+
+app/hero-data.ts
+```js
+export class HeroData {
+  createDb() {
+    let heroes = [
+      { "id": "1", "name": "Windstorm" },
+      { "id": "2", "name": "Bombasto" },
+      { "id": "3", "name": "Magneta" },
+      { "id": "4", "name": "Tornado" }
+    ];
+    return {heroes};
+  }
+}
+```
+
+We update the HeroService endpoint to the location of the web api data.
+
+```js
+private _heroesUrl = 'app/heroes';  // URL to web api
+```
+
+Finally, we tell Angular itself to direct its http requests to the in-memory web api rather than externally to a remote server.
+
+This redirection is easy because Angular's http delegates the client/server communication tasks to a helper service called the XHRBackend.
+
+To enable our server simulation, we replace the default XHRBackend service with the in-memory web api service using standard Angular provider registration in the TohComponent. We initialize the in-memory web api with mock hero data at the same time.
+
+Here are the pertinent details, excerpted from TohComponent, starting with the imports:
+
+toh.component.ts (web api imports)
+```js
+import { provide }           from '@angular/core';
+import { XHRBackend }        from '@angular/http';
+
+// in-memory web api imports
+import { InMemoryBackendService,
+        SEED_DATA }          from 'angular2-in-memory-web-api/core';
+import { HeroData }          from '../hero-data';
+```
+
+Then we add the following two provider definitions to the providers array in component metadata:
+
+toh.component.ts (web api providers)
+```js
+// in-memory web api providers
+provide(XHRBackend, { useClass: InMemoryBackendService }), // in-mem server
+provide(SEED_DATA,  { useClass: HeroData }) // in-mem server data
+```
+
+See the full source code in the [live example](https://angular.io/resources/live-examples/server-communication/ts/plnkr.html).
