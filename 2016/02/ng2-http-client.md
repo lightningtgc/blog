@@ -651,3 +651,40 @@ The user enters angular, pauses, clears the search box, and enters http. The app
 Which response will arrive first? We can't be sure. A load balancer could dispatch the requests to two different servers with different response times. The results from the first angular request might arrive after the later http results. The user will be confused if we display the angular results to the http query.
 
 When there are multiple requests in-flight, the app should present the responses in the original request order. That won't happen if angular results arrive last.
+
+### More fun with Observables
+
+We can address these problems and improve our app with the help of some nifty observable operators.
+
+We could make our changes to the WikipediaService. But we sense that our concerns are driven by the user experience so we update the component class instead.
+
+app/wiki/wiki-smart.component.ts
+```js
+import {Component}        from '@angular/core';
+import {JSONP_PROVIDERS}  from '@angular/http';
+import {Observable}       from 'rxjs/Observable';
+import {Subject}          from 'rxjs/Subject';
+import {WikipediaService} from './wikipedia.service';
+@Component({
+  selector: 'my-wiki-smart',
+  template: `
+    <h1>Smarter Wikipedia Demo</h1>
+    <p><i>Fetches when typing stops</i></p>
+    <input #term (keyup)="search(term.value)"/>
+    <ul>
+      <li *ngFor="let item of items | async">{{item}}</li>
+    </ul>
+  `,
+  providers:[JSONP_PROVIDERS, WikipediaService]
+})
+export class WikiSmartComponent {
+  constructor (private _wikipediaService: WikipediaService) { }
+  private _searchTermStream = new Subject<string>();
+  search(term:string) { this._searchTermStream.next(term); }
+  items:Observable<string[]> = this._searchTermStream
+    .debounceTime(300)
+    .distinctUntilChanged()
+    .switchMap((term:string) => this._wikipediaService.search(term));
+}
+```
+We made no changes to the template or metadata, confining them all to the component class. Let's review those changes.
