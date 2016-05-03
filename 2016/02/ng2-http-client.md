@@ -688,3 +688,39 @@ export class WikiSmartComponent {
 }
 ```
 We made no changes to the template or metadata, confining them all to the component class. Let's review those changes.
+
+##### Create a stream of search terms
+
+We're binding to the search box keyup event and calling the component's search method after each keystroke.
+
+We turn these events into an observable stream of search terms using a Subject which we import from the RxJS observable library:
+```js
+import {Subject}          from 'rxjs/Subject';
+```
+
+Each search term is a string, so we create a new Subject of type string called _searchTermStream. After every keystroke, the search method adds the search box value to that stream via the subject's next method.
+
+```js
+private _searchTermStream = new Subject<string>();
+
+search(term:string) { this._searchTermStream.next(term); }
+```
+
+#### Listen for search terms
+
+Earlier, we passed each search term directly to the service and bound the template to the service results. Now we listen to the stream of terms, manipulating the stream before it reaches the WikipediaService.
+```js
+items:Observable<string[]> = this._searchTermStream
+  .debounceTime(300)
+  .distinctUntilChanged()
+  .switchMap((term:string) => this._wikipediaService.search(term));
+```
+
+We wait for the user to stop typing for at least 300 milliseconds (debounce). Only changed search values make it through to the service (distinctUntilChanged).
+
+The WikipediaService returns a separate observable of string arrays (Observable<string[]>) for each request. We could have multiple requests in flight, all awaiting the server's reply, which means multiple observables-of-strings could arrive at any moment in any order.
+
+The switchMap (formerly known as flatMapLatest) returns a new observable that combines these WikipediaService observables, re-arranges them in their original request order, and delivers to subscribers only the most recent search results.
+
+The displayed list of search results stays in sync with the user's sequence of search terms.
+
