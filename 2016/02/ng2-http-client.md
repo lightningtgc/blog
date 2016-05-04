@@ -628,23 +628,23 @@ The search(term) method delegates to our WikipediaService which returns an obser
 
 > We often use the async pipe in read-only components where the component has no need to interact with the data. We couldn't use the pipe in the HeroListComponent because the "add hero" feature pushes newly created heroes into the list.
 
-### Our wasteful app
+### 我们铺张浪费的应用程序
 
 Our wikipedia search makes too many calls to the server. It is inefficient and potentially expensive on mobile devices with limited data plans.
 
-##### 1. Wait for the user to stop typing
+##### 1. 等待用户停止输入
 
 At the moment we call the server after every key stroke. The app should only make requests when the user stops typing . Here's how it should work — and will work — when we're done refactoring:
 
 图
 
-##### 2. Search when the search term changes
+##### 2. 当搜索项改变时再搜索
 
 Suppose the user enters the word angular in the search box and pauses for a while. The application issues a search request for Angular.
 
 Then the user backspaces over the last three letters, lar, and immediately re-types lar before pausing once more. The search term is still "angular". The app shouldn't make another request.
 
-##### 3. Cope with out-of-order responses
+##### 3. 处理无序的响应
 
 The user enters angular, pauses, clears the search box, and enters http. The application issues two search requests, one for angular and one for http.
 
