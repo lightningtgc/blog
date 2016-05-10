@@ -526,7 +526,8 @@ Some servers do not support CORS but do support an older, read-only alternative 
 图片
 
 
-The Angular Jsonp service both extends the Http service for JSONP and restricts us to GET requests. All other HTTP methods throw an error because JSONP is a read-only facility.
+Angular Jsonp服务既为JSONP扩展了Http服务又约束我们只使用GET请求。因为JSONP是一个只读设备，所以其他所有的HTTP方法都会抛出一个的错误。
+
 
 As always, we wrap our interaction with an Angular data access client service inside a dedicated service, here called WikipediaService.
 
@@ -554,6 +555,7 @@ export class WikipediaService {
 The constructor expects Angular to inject its jsonp service. We register that service with JSONP_PROVIDERS in the component below that calls our WikipediaService.
 
 #### 搜索的参数
+
 
 The Wikipedia 'opensearch' API expects four parameters (key/value pairs) to arrive in the request URL's query string. The keys are search, action, format, and callback. The value of the search key is the user-supplied search term to find in Wikipedia. The other three are the fixed values "opensearch", "json", and "JSONP_CALLBACK" respectively.
 
