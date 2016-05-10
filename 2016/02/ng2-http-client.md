@@ -652,7 +652,7 @@ Which response will arrive first? We can't be sure. A load balancer could dispat
 
 When there are multiple requests in-flight, the app should present the responses in the original request order. That won't happen if angular results arrive last.
 
-### More fun with Observables
+### 更多Observables的乐趣
 
 We can address these problems and improve our app with the help of some nifty observable operators.
 
@@ -689,7 +689,7 @@ export class WikiSmartComponent {
 ```
 We made no changes to the template or metadata, confining them all to the component class. Let's review those changes.
 
-##### Create a stream of search terms
+##### 创建一个搜索项的流
 
 We're binding to the search box keyup event and calling the component's search method after each keystroke.
 
@@ -706,7 +706,7 @@ private _searchTermStream = new Subject<string>();
 search(term:string) { this._searchTermStream.next(term); }
 ```
 
-#### Listen for search terms
+#### 监听搜索项
 
 Earlier, we passed each search term directly to the service and bound the template to the service results. Now we listen to the stream of terms, manipulating the stream before it reaches the WikipediaService.
 ```js
@@ -725,7 +725,7 @@ The switchMap (formerly known as flatMapLatest) returns a new observable that co
 The displayed list of search results stays in sync with the user's sequence of search terms.
 
 
-## Appendix: Tour of Heroes in-memory server
+## 附录：存放在内存服务器的‘英雄的旅程’
 
 If we only cared to retrieve data, we could tell Angular to get the heroes from a heroes.json file like this one:
 
