@@ -520,9 +520,11 @@ Some servers do not support CORS but do support an older, read-only alternative 
 > This StackOverflow answer covers many details of JSONP.
 
 #### 搜索wikipedia（维基百科）
-Wikipedia offers a JSONP search api. Let's build a simple search that shows suggestions from wikipedia as we type in a text box.
+维基百科提供一个JSONP的搜索接口。让我们构建一个只要我们在文本框中输入就能从维基百科中展示联想内容的简单搜索功能。
+
 
 图片
+
 
 The Angular Jsonp service both extends the Http service for JSONP and restricts us to GET requests. All other HTTP methods throw an error because JSONP is a read-only facility.
 
