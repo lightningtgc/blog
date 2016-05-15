@@ -820,4 +820,5 @@ provide(XHRBackend, { useClass: InMemoryBackendService }), // in-mem server
 provide(SEED_DATA,  { useClass: HeroData }) // in-mem server data
 ```
 
-See the full source code in the [live example](https://angular.io/resources/live-examples/server-communication/ts/plnkr.html).
+在这个[在线的例子](https://angular.io/resources/live-examples/server-communication/ts/plnkr.html)中看看全部的源码。
+
