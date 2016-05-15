@@ -634,7 +634,7 @@ The search(term) method delegates to our WikipediaService which returns an obser
 
 ### 我们铺张浪费的应用程序
 
-Our wikipedia search makes too many calls to the server. It is inefficient and potentially expensive on mobile devices with limited data plans.
+我们的维基百科搜索制造了太多服务端的回调。这是低效的且对于有限资源的移动设备存在潜在的昂贵性能开销。
 
 ##### 1. 等待用户停止输入
 
