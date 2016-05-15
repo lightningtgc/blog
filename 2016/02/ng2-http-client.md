@@ -528,8 +528,7 @@ Some servers do not support CORS but do support an older, read-only alternative 
 
 Angular Jsonp服务既为JSONP扩展了Http服务又约束我们只使用GET请求。因为JSONP是一个只读设备，所以其他所有的HTTP方法都会抛出一个的错误。
 
-
-As always, we wrap our interaction with an Angular data access client service inside a dedicated service, here called WikipediaService.
+一如既往，我们将与一个Angular 数据通信客户端服务的交互包装进一个专用的服务里，这里将它命名为`WikipediaService`。
 
 app/wiki/wikipedia.service.ts
 ```js
