@@ -747,7 +747,7 @@ app/heroes.json
 
 > We wrap the heroes array in an object with a data property for the same reason that a data server does: to mitigate the security risk posed by top-level JSON arrays.
 
-We'd set the endpoint to the JSON file like this:
+我们像这样设置JSON文件的源点：
 
 ```js
 private _heroesUrl = 'app/heroes.json'; // URL to JSON file
@@ -756,7 +756,7 @@ The get heroes scenario would work. But we want to save data too. We can't save 
 
 We didn't want the hassle of setting up and maintaining a real server for this chapter. So we turned to an in-memory web api simulator instead. You too can use it in your own development while waiting for a real server to arrive.
 
-First, install it with `npm`:
+首先，通过`npm`安装它：
 ```
 npm install a2-in-memory-web-api --save
 ```
