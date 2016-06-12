@@ -497,8 +497,7 @@ app/toh/hero-list.component.ts (observable-based)
   }
 ```
 
-唯一明显的不同是我们调用的是返回的promise的`then`方法而不是`subscribe`方法。
- We give both methods the same functional arguments.
+唯一明显的不同是我们调用的是返回的promise的`then`方法而不是`subscribe`方法。我们给这两个方法相同的调用参数。
 
 > The less obvious but critical difference is that these two methods return very different results!
 
