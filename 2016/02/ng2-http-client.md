@@ -560,7 +560,7 @@ The Wikipedia 'opensearch' API expects four parameters (key/value pairs) to arri
 
 > The JSONP technique requires that we pass a callback function name to the server in the query string: callback=JSONP_CALLBACK. The server uses that name to build a JavaScript wrapper function in its response which Angular ultimately calls to extract the data. All of this happens under the hood.
 
-If we're looking for articles with the word "Angular", we could construct the query string by hand and call jsonp like this:
+如果我们搜索包含"Angular"文字的文章，我们能手动构造查询字符串并像这样调用jsonp：
 ```js
 
 let queryString =
