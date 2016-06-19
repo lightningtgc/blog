@@ -509,6 +509,7 @@ app/toh/hero-list.component.ts (observable-based)
 
 ### 通过`JSONP`获取数据
 
+我们刚学了如何使用Angular内置的`Http`服务来创造`XMLHttpRequests`。
 We just learned how to make `XMLHttpRequests` using Angulars built-in `Http` service. This is the most common approach for server communication. It doesn't work in all scenarios.
 
 For security reasons, web browsers block `XHR` calls to a remote server whose origin is different from the origin of the web page. The origin is the combination of URI scheme, hostname and port number. This is called the Same-origin Policy.
