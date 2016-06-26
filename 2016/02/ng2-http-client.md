@@ -638,7 +638,7 @@ The search(term) method delegates to our WikipediaService which returns an obser
 
 ##### 1. 等待用户停止输入
 
-在每次点击后
+在我们每次点击调用服务器的时刻。
 At the moment we call the server after every key stroke. The app should only make requests when the user stops typing . Here's how it should work — and will work — when we're done refactoring:
 
 图
